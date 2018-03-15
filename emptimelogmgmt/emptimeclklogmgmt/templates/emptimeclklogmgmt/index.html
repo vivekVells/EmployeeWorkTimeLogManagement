@@ -1,9 +1,44 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+    
         <title>Employee Time Clock v1.0</title>
+    
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'emptimeclklogmgmt/bootstrap.min.css' %}" rel="stylesheet"> 
+        <!-- Bootstrap theme -->
+        <link href="{% static 'emptimeclklogmgmt/bootstrap-theme.min.css' %}" rel="stylesheet">
+    
+        <!-- Custom styles for this template -->
+        <link href="{% static 'emptimeclklogmgmt/sign.css' %}" rel="stylesheet">
     </head>
     <body>
-        <center>LOG IN PAGE</center>
+        <div class="container theme-showcase" role="main">
+            <div class="jumbotron">
+                <h1><center>Log In Page</center> </h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <form class="form-signin" method="POST" action="logIn">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="inputName" class="sr-only">Username</label>
+                    <input type="text" id="inputName" class="form-control" placeholder="Username" required autofocus>
+                </div>
+                <div class="form-group">
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password">
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+            </form>
+        </div>
     </body>
 </html>
