@@ -22,26 +22,8 @@
     <body>
         <div class="container theme-showcase" role="main">
             <div class="jumbotron">
-                <h1><center>Log In Page</center> </h1>
+                <h1><center>Time Clock Home Page</center> </h1>
             </div>
-        </div>
-
-        <div class="container">
-            <form class="form-signin" method="POST" action="{% url 'login' %}">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="inputName" class="sr-only">Username</label>
-                    {{form.username}}
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword" class="sr-only">Password</label>
-                    {{form.password}}
-                </div>
-                <center>
-                    <button class="btn btn-lg btn-primary" type="submit">Log In</button>
-                    <a href="{% url 'login' %}" class="btn btn-lg btn-primary">Register User</a>
-                </center>
-            </form>
         </div>
     </body>
 </html>
