@@ -27,7 +27,7 @@
         </div>
 
         <div class="container">
-            <form class="form-signin" method="POST" action="{% url 'login' %}">
+            <form class="form-signin" method="POST" action="{% url 'home' %}">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="inputName" class="sr-only">Username</label>
@@ -39,7 +39,7 @@
                 </div>
                 <center>
                     <button class="btn btn-lg btn-primary" type="submit">Log In</button>
-                    <a href="{% url 'login' %}" class="btn btn-lg btn-primary">Register User</a>
+                    <a href="{% url 'register' %}" class="btn btn-lg btn-primary">Register User</a>
                 </center>
             </form>
         </div>

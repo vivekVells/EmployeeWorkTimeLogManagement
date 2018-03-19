@@ -24,6 +24,11 @@
             <div class="jumbotron">
                 <h1><center>Time Clock Home Page</center> </h1>
             </div>
+            <center>
+                Username: {{form.username}} <br>
+                Password: {{form.password}}
+                <a href="{% url 'register' %}" class="btn btn-lg btn-primary">Back</a>
+            </center>
         </div>
     </body>
 </html>
