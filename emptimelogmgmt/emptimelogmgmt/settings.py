@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'emptimeclklogmgmt',
+    # 'emptimeclklogmgmt',
+    'emptimeclklogmgmt.apps.EmptimeclklogmgmtConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

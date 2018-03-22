@@ -25,10 +25,38 @@
                 <h1><center>Time Clock Home Page</center> </h1>
             </div>
             <center>
-                Username: {{form.username}} <br>
-                Password: {{form.password}}
                 <a href="{% url 'register' %}" class="btn btn-lg btn-primary">Back</a>
             </center>
+            <div>
+                <table border="1" style="width:150px; float:left; margin:5px">
+                    <tbody>
+                        <tr>
+                            <td>In/Out</td>
+                        </tr>
+                        <tr>
+                            <td>Notes:</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table border="1" style="width:300px; float:left; margin:5px">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>USERNAME</td>
+                        <td>PASSWORD</td>
+                    </tr>
+                </thead>
+                {% for user in users %}
+                    <tbody>
+                        <tr>
+                            <td>{{user.id}}</td>
+                            <td>{{user.username}}</td>
+                            <td>{{user.password}}</td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
         </div>
     </body>
 </html>
