@@ -31,7 +31,7 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="inputName" class="sr-only">Username</label>
-                    {{form.username}}
+                    {{form.username}} {{message}}
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="sr-only">Password</label>
