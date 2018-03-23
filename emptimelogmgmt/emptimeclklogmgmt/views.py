@@ -3,15 +3,22 @@ from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from . import forms
 from . models import Emp, Employee, EmployeeInfo, user
+import time
+
+userExistsStatus = False
 
 def logout(request):
+    global userExistsStatus
+    userExistsStatus = False
     try:
         del request.session['user_id']
     except KeyError:
         pass
-    return redirect('timeclockindex')
+    return redirect('index')
 
 def delSession(request):
+    global userExistsStatus
+    userExistsStatus = False
     try:
         del request.session['user_id']
     except KeyError:
@@ -23,6 +30,8 @@ def login(request):
         user = Emp.objects.get(username=request.POST['username']) 
         if user.password == request.POST['password']:
             request.session['user_id'] = user.id
+            global userExistsStatus
+            userExistsStatus = True
             return True
         else:
             delSession(request)
@@ -47,12 +56,15 @@ def index(request):
         return render(request, 'emptimeclklogmgmt/index.html', context)
 
 def home(request):
-    if request.method == 'POST':
-        return None
+    if userExistsStatus:
+        if request.method == 'POST':
+            return render(request,'emptimeclklogmgmt/homepage.html', {})
+        else:
+            users = Employee.objects.all()
+            context = {'users' : users}
+            return render(request,'emptimeclklogmgmt/homepage.html', context)
     else:
-        users = Employee.objects.all()
-        context = {'users' : users}
-        return render(request,'emptimeclklogmgmt/homepage.html', context)
+        return HttpResponse('Login again using the link: \'http://127.0.0.1:8000/timeclock/\' ')
 
 def register(request):
     if request.method == 'POST':
@@ -88,7 +100,7 @@ def register(request):
             )
             empInfoObj.save()
 
-        return redirect('timeclockindex')
+        return redirect('index')
     registerForms = forms.RegisterForms()
     context = {'user' : registerForms}
     return render(request, 'emptimeclklogmgmt/registeruser.html', context)

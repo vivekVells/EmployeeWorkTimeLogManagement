@@ -31,12 +31,16 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="inputName" class="sr-only">Username</label>
-                    {{form.username}} {{message}}
+                    {{form.username}}
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="sr-only">Password</label>
                     {{form.password}}
                 </div>
+                <div>
+                    {{message}}
+                </div>
+                <br>
                 <center>
                     <button class="btn btn-lg btn-primary" type="submit">Log In</button>
                     <a href="{% url 'register' %}" class="btn btn-lg btn-primary">Register User</a>

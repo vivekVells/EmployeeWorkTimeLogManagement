@@ -23,28 +23,55 @@
         <div class="container theme-showcase" role="main">
             <div class="jumbotron">
                 <h1><center>Time Clock Home Page</center> </h1>
+                <center class="text-right">
+                        <a href="{% url 'logout' %}" class="btn btn-lg btn-primary">Logout</a>
+                </center>
             </div>
-            <center>
-                <a href="{% url 'logout' %}" class="btn btn-lg btn-primary">Logout</a>
-            </center>
+            <br><br>
             <div>
-                <table border="1" style="width:150px; float:left; margin:5px">
+                <table border="0" style="width:150px; float:left; margin:5px">
                     <tbody>
                         <tr>
-                            <td>In/Out</td>
+                            <td>In/Out:
+                                <br>
+                                <div>
+                                    <select>
+                                        <option value="" selected></option>
+                                        <option value="in">In</option>
+                                        <option value="break">Break</option>
+                                        <option value="lunch">Lunch</option>
+                                        <option value="out">Out</option>
+                                    </select>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
-                            <td>Notes:</td>
+                            <td>Notes:
+                                <br>
+                                <div>
+                                    <textarea>
+
+                                    </textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="{% url 'home' %}" class="btn btn-sm btn-primary">Submit</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <table border="1" style="width:300px; float:left; margin:5px">
+            <table border="0" style="width:300px; float:left; margin:5px">
                 <thead>
                     <tr>
-                        <td>ID</td>
-                        <td>USERNAME</td>
-                        <td>PASSWORD</td>
+                        <td>Name</td>
+                        <td>In/Out</td>
+                        <td>Time</td>
+                        <td>Date</td>
+                        <td>Group</td>
+                        <td>Notes</td>
                     </tr>
                 </thead>
                 {% for user in users %}
