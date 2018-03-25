@@ -2,14 +2,11 @@ from django.db import models
 from django.utils import timezone
 from datetime import date
 
-# employee     -> username, password, recoveryAnswer, recoveryEmail, createdOn, lastUpdatedOn, deletedOn
-# employeeInfo -> employeeId, firstName, lastName, phoneNumber, createdOn, deletedOn
-
 class Emp(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
     recovery_answer = models.CharField(max_length=20)
-    recovery_email = models.CharField(max_length=20)
+    recovery_email = models.CharField(max_length=50)
     created_on = models.DateTimeField(default=timezone.now)
     last_updated_on = models.DateTimeField(blank=True, null=True)
     deleted_on = models.DateTimeField(blank=True, null=True)
@@ -57,8 +54,8 @@ class Status(models.Model):
 class Work(models.Model):
     employee = models.ForeignKey('Employee', on_delete=models.CASCADE)
     work_status = models.CharField(max_length=30)
-    notes = models.CharField(max_length=100, default='')
-    time = models.TimeField(default=timezone.now)
+    notes = models.CharField(max_length=100, default='', blank=True)
+    time = models.TimeField(default=timezone.localtime)
     date = models.DateField(default=date.today)
 
     def __str__(self):

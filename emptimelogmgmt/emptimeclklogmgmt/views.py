@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from . import forms
-from . models import Employee, EmployeeInfo, Status
-import time
+from . models import Employee, EmployeeInfo, Status, Work
+import datetime
 
 userExistsStatus = False
 userRef = ''
@@ -68,7 +68,7 @@ def home(request):
 
             # create a new entry of time log status for the employee
             employee.work_set.create(
-                work_status=request.POST['status_of'],
+                work_status=request.POST['status_drop'],
                 notes=request.POST['notes']
             )
             
@@ -77,7 +77,9 @@ def home(request):
         else:
             employees = Employee.objects.all()
             statuses = Status.objects.all()
-            context = {'employees' : employees, 'statuses' : statuses, 'logstatus' : logstatusForm, 'userRef' : userRef}
+            work_statuses = Work.objects.filter(date=datetime.date.today())
+            ws_desc = work_statuses.order_by('-time')
+            context = {'ws_desc' : ws_desc, 'employees' : employees, 'statuses' : statuses, 'logstatus' : logstatusForm, 'userRef' : userRef}
             return render(request,'emptimeclklogmgmt/homepage.html', context)
     else:
         return HttpResponse('Login again using the link: \'http://127.0.0.1:8000/timeclock/\' ')
@@ -106,3 +108,4 @@ def register(request):
     else:
         context = {'user' : registerForm}
         return render(request, 'emptimeclklogmgmt/registeruser.html', context)
+    

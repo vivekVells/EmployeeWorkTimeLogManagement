@@ -45,16 +45,13 @@
                                     <tr>
                                         <td>In/Out:
                                             <br>
-                                            <div>
-                                                {{logstatus.status_of}}
-                                                <!--
-                                                <select>
+                                            <div>                                                
+                                                <select name='status_drop'>
                                                     <option selected></option>
                                                     {% for status in statuses %}
                                                     <option>{{status.types}}</option>
                                                     {% endfor %}
                                                 </select>
-                                                -->
                                             </div>
                                         </td>
                                     </tr>
@@ -62,13 +59,6 @@
                                         <td>Notes:
                                             <br>
                                             {{logstatus.notes}}
-                                            <div>
-                                            <!--
-                                                <textarea>
-
-                                                </textarea>
-                                            -->
-                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -84,14 +74,39 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <td>Name &nbsp;</td>
-                                <td>In/Out &nbsp;</td>
-                                <td>Time &nbsp;</td>
-                                <td>Date &nbsp;</td>
-                                <td>Group &nbsp;</td>
-                                <td>Notes</td>
+                                <th>Name</th>
+                                <th>In/Out</th>
+                                <th>Time</th>
+                                <th>Date</th>
+                                <th>Group</th>
+                                <th>Notes</th>
                             </tr>
                         </thead>
+                        {% for ws in ws_desc %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{ws.employee.employeeinfo_set.all.0.last_name}}, {{ws.employee.employeeinfo_set.all.0.first_name}}
+                                </td>
+                                <td>
+                                    {{ws.work_status}}
+                                </td>
+                                <td>
+                                    {{ws.time}}
+                                </td>
+                                <td>
+                                    {{ws.date}}
+                                </td>
+                                <td>
+                                    {{ws.employee.employeeinfo_set.all.0.department}}
+                                </td>
+                                <td>
+                                    {{ws.notes}}
+                                </td>
+                            </tr>
+                        </tbody>    
+                        {% endfor %}
+                        <!--
                         {% for employee in employees %}
                             {% for ews in employee.work_set.all %}
                                 {% for employee_info in employee.employeeinfo_set.all %}
@@ -120,6 +135,7 @@
                                 {% endfor %}
                             {% endfor %}
                         {% endfor %}
+                            -->
                     </table>
                 </div>
             </div>
