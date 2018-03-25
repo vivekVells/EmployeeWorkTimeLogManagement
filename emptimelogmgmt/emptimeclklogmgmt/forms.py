@@ -6,6 +6,13 @@ class LoginForms(forms.Form):
     password = forms.CharField(max_length=20,
                 widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'password'}))
 
+class LogStatus(forms.Form):
+    status_of = forms.CharField(max_length=20,
+                widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Status' }))
+    notes = forms.CharField(max_length=20,
+                widget=forms.Textarea(attrs={ 'class' : 'form-control', 'placeholder' : 'Notes' }))
+                
+
 '''
 class Employee(models.Model):
     username = models.CharField(max_length=20)
@@ -27,9 +34,9 @@ class EmployeeInfo(models.Model):
 '''
 class RegisterForms(forms.Form):
     username = forms.CharField(max_length=20,
-                widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'username' }))
+                widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Username' }))
     password = forms.CharField(max_length=20,
-                widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'password'}))
+                widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Password'}))
     recovery_answer = forms.CharField(max_length=20,
                 widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Recovery Answer'}))
     recovery_email = forms.CharField(max_length=20,
@@ -40,6 +47,8 @@ class RegisterForms(forms.Form):
                 widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Middle Name'}))
     last_name = forms.CharField(max_length=20,
                 widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Last Name'}))
+    department = forms.CharField(max_length=30,
+                widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Department'}))
     phone_number = forms.IntegerField(widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Phone Number'}))
     
     

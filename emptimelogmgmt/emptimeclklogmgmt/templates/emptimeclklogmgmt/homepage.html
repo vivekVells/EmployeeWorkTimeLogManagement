@@ -20,73 +20,109 @@
         <link href="{% static 'emptimeclklogmgmt/sign.css' %}" rel="stylesheet">
     </head>
     <body>
-        <div class="container theme-showcase" role="main">
-            <div class="jumbotron">
-                <h1><center>Time Clock Home Page</center> </h1>
-                <center class="text-right">
-                        <a href="{% url 'logout' %}" class="btn btn-lg btn-primary">Logout</a>
-                </center>
-            </div>
-            <br><br>
+        <div class="container theme-showcase">
             <div>
-                <table border="0" style="width:150px; float:left; margin:5px">
+                <h1><center>Time Clock Home Page</center> </h1>
+                <table class="table">
                     <tbody>
                         <tr>
-                            <td>In/Out:
-                                <br>
-                                <div>
-                                    <select>
-                                        <option value="" selected></option>
-                                        <option value="in">In</option>
-                                        <option value="break">Break</option>
-                                        <option value="lunch">Lunch</option>
-                                        <option value="out">Out</option>
-                                    </select>
-                                </div>
+                            <td class="text-left">
+                                Logged in as {{userRef}} 
                             </td>
-                        </tr>
-                        <tr>
-                            <td>Notes:
-                                <br>
-                                <div>
-                                    <textarea>
-
-                                    </textarea>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="{% url 'home' %}" class="btn btn-sm btn-primary">Submit</a>
-                            </td>
-                        </tr>
+                            <td class="text-right">
+                            <a href="{% url 'logout' %}" class="btn btn-md btn-primary">Logout</a>
+                        </td></tr>
                     </tbody>
                 </table>
             </div>
-            <table border="0" style="width:300px; float:left; margin:5px">
-                <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>In/Out</td>
-                        <td>Time</td>
-                        <td>Date</td>
-                        <td>Group</td>
-                        <td>Notes</td>
-                    </tr>
-                </thead>
-                {% for user in users %}
-                    <tbody>
-                        <tr>
-                            <td>{{user.id}}</td>
-                            <td>{{user.username}}</td>
-                            <td>{{user.password}}</td>
-                            {% for userInfo in user.employeeinfo_set.all %}
-                                <td>{{userInfo.first_name}}</td>
+            <br><br>
+            <div class="row"> 
+                    <div class="table-responsive col-md-2">
+                        <form method="POST" action="{% url 'home' %}">
+                            {% csrf_token %}
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>In/Out:
+                                            <br>
+                                            <div>
+                                                {{logstatus.status_of}}
+                                                <!--
+                                                <select>
+                                                    <option selected></option>
+                                                    {% for status in statuses %}
+                                                    <option>{{status.types}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Notes:
+                                            <br>
+                                            {{logstatus.notes}}
+                                            <div>
+                                            <!--
+                                                <textarea>
+
+                                                </textarea>
+                                            -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <br>
+                                            <button class="btn btn-sm btn-primary">Submit</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                <div class="table-responsive col-md-10">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Name &nbsp;</td>
+                                <td>In/Out &nbsp;</td>
+                                <td>Time &nbsp;</td>
+                                <td>Date &nbsp;</td>
+                                <td>Group &nbsp;</td>
+                                <td>Notes</td>
+                            </tr>
+                        </thead>
+                        {% for employee in employees %}
+                            {% for ews in employee.work_set.all %}
+                                {% for employee_info in employee.employeeinfo_set.all %}
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{employee_info.last_name}}, {{employee_info.first_name}}
+                                        </div> </td>
+                                        <td>
+                                            {{ews.work_status}}
+                                        </div> </td>
+                                        <td>
+                                            {{ews.time}}
+                                        </div> </td>                    
+                                        <td>
+                                            {{ews.date}}
+                                        </div> </td>                    
+                                        <td>
+                                            {{employee_info.department}}
+                                        </td>                    
+                                        <td>
+                                            {{ews.notes}}
+                                        </div> </td>                                                                            
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
                             {% endfor %}
-                        </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
         </div>
     </body>
 </html>
