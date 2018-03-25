@@ -73,8 +73,7 @@ def home(request):
             )
             
             employees = Employee.objects.all()
-            context = {'employees' : employees, 'logstatus' : logstatusForm, 'userRef' : userRef}
-            return render(request,'emptimeclklogmgmt/homepage.html', context)
+            return redirect('home')
         else:
             employees = Employee.objects.all()
             statuses = Status.objects.all()
