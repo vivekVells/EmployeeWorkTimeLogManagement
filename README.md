@@ -21,7 +21,7 @@ An app to manage the employee work hours log like checked-in, break, lunch, chec
 #### In console (Tested in Windows using GitBash cmd) - follow the steps
 - Step 1: Make sure Python setup is available in your machine (coded when python was on version 3.6.2) & do django version as 2.0.3
 - Step 2: Open console command prompt or gitbash (I love git bash. Try this one)
-- Step 3: Pull this code to your machine and run it (Install git and use git bash for the followings) (you could also do git clone and proceed to Step 3.6)
+- Step 3: Pull this code to your machine and run it (Install git and use git bash for the followings) (you could also do git clone and proceed from Step 3.4)
   - Step 3.1: Create a folder and do 
     - **git init**
   - Step 3.2: Add this repo as your remote origin 
