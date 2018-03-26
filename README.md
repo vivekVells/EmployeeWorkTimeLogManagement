@@ -42,8 +42,11 @@ An app to manage the employee work hours log like checked-in, break, lunch, chec
 - Step 4: In 'Login Page', click 'Register User' and register the user
 - Step 5: In 'New Registration Page', create the user
 - Step 6: In 'Login Page', input the login credentials and toto 'Time Clock Home Page' and log your working hours 
-  
+
 ## App Working Functionality Previews
+### Preview 
+![](https://github.com/vivekVells/EmployeeWorkTimeLogManagement/blob/master/demo/Employee%20Time%20Clock%20Mgmt%20-%20Working%20GIF%20v1.0.gif)
+### Images
 Login Page![](https://github.com/vivekVells/EmployeeWorkTimeLogManagement/blob/master/memories/v1.1%20-%20Login%20Page.png)
 Home Page![](https://github.com/vivekVells/EmployeeWorkTimeLogManagement/blob/master/memories/v1.1%20-%20Home%20Page.png)
 Registration Page![](https://github.com/vivekVells/EmployeeWorkTimeLogManagement/blob/master/memories/v1.0%20-%20Registration%20Page.png)
