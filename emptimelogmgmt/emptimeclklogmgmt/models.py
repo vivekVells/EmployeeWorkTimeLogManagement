@@ -30,7 +30,7 @@ class Employee(models.Model):
     deleted_on = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return "%d %s %s" % (self.id, self.username, self.password)
+        return "ID: %d Username: %s Password: %s" % (self.id, self.username, self.password)
 
 class EmployeeInfo(models.Model):
     employee = models.ForeignKey('Employee', on_delete=models.CASCADE)
@@ -43,7 +43,7 @@ class EmployeeInfo(models.Model):
     deleted_on = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return "%d %s %s %s %s" % (self.id, self.first_name, self.middle_name, self.last_name, self.phone_number)
+        return "ID: %d First Name: %s Middle Name: %s Last Name: %s Phone Number: %s" % (self.id, self.first_name, self.middle_name, self.last_name, self.phone_number)
 
 class Status(models.Model):
     types = models.CharField(max_length=30)
@@ -59,7 +59,7 @@ class Work(models.Model):
     date = models.DateField(default=date.today)
 
     def __str__(self):
-        return "%d %s %s %s %s" % (self.id, self.work_status, self.notes, self.time, self.date)
+        return "ID: %d Work Status: %s Notes: %s Time: %s Date: %s" % (self.id, self.work_status, self.notes, self.time, self.date)
 
 class user(models.Model):
     username = models.CharField(max_length=20)

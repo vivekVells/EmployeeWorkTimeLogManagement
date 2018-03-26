@@ -106,36 +106,6 @@
                             </tr>
                         </tbody>    
                         {% endfor %}
-                        <!--
-                        {% for employee in employees %}
-                            {% for ews in employee.work_set.all %}
-                                {% for employee_info in employee.employeeinfo_set.all %}
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            {{employee_info.last_name}}, {{employee_info.first_name}}
-                                        </div> </td>
-                                        <td>
-                                            {{ews.work_status}}
-                                        </div> </td>
-                                        <td>
-                                            {{ews.time}}
-                                        </div> </td>                    
-                                        <td>
-                                            {{ews.date}}
-                                        </div> </td>                    
-                                        <td>
-                                            {{employee_info.department}}
-                                        </td>                    
-                                        <td>
-                                            {{ews.notes}}
-                                        </div> </td>                                                                            
-                                    </tr>
-                                </tbody>
-                                {% endfor %}
-                            {% endfor %}
-                        {% endfor %}
-                            -->
                     </table>
                 </div>
             </div>
