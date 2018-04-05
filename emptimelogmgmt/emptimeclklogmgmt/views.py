@@ -3,10 +3,19 @@ from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from . import forms
 from . models import Employee, EmployeeInfo, Status, Work
+from . import mailer
 import datetime
 
 userExistsStatus = False
 userRef = ''
+
+def schedule(request):
+    mailer.scheduleMailJob()
+    return redirect('index')
+
+def stopschedule(request):
+    mailer.stopMailer()
+    return redirect('index')
 
 def logout(request):
     global userExistsStatus, userRef

@@ -27,5 +27,6 @@ class RegisterForms(forms.Form):
                 widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Last Name'}))
     department = forms.CharField(max_length=30,
                 widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Department'}))
-    phone_number = forms.IntegerField(widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Phone Number'}))
+    phone_number = forms.IntegerField(
+                widget=forms.TextInput(attrs={ 'class' : 'form-control', 'placeholder' : 'Phone Number'}))
     
