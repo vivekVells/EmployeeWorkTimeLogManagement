@@ -1,13 +1,22 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from . import forms
-from . models import Employee, EmployeeInfo, Status, Work
+from . models import Employee, EmployeeInfo, Status, Work, EmployeeAES, EmployeeInfoAES
 from . import mailer
 import datetime
+import pyaes
+
+key = 'kkkkkkkkkkkkkkkk'.encode('UTF-8')
 
 userExistsStatus = False
 userRef = ''
+
+def pad(key):
+    return key + (16 - len(key) % 10) * '{'
+
 
 def schedule(request):
     mailer.scheduleMailJob()
@@ -73,7 +82,7 @@ def home(request):
         logstatusForm = forms.LogStatus()
         if request.method == 'POST':
             # retrieving the employee from Employee
-            employee = Employee.objects.get(username=str(userRef))
+            employee = Employee.objects.get(username=(str(userRef)))
 
             # create a new entry of time log status for the employee
             employee.work_set.create(
@@ -93,28 +102,41 @@ def home(request):
     else:
         return HttpResponse('Login again using the link: \'http://127.0.0.1:8000/timeclock/\' ')
 
+
+def getNewAES():
+    newaes = pyaes.AESModeOfOperationCTR(key)
+    return newaes
+
+def getBackByteFromString(strhavingbyte):
+    if(strhavingbyte != ("[")):
+        return strhavingbyte[1:].split("'")[1].encode('UTF-8')
+    else:
+        return strhavingbyte[1:].split("'")[1].encode('UTF-8')
+
 def register(request):
     registerForm = forms.RegisterForms()
     if request.method == 'POST':
-        if registerForm.is_valid:       
-            empObj = Employee(
-                username=request.POST['username'], 
-                password=request.POST['password'], 
-                recovery_answer=request.POST['recovery_answer'], 
-                recovery_email=request.POST['recovery_email']
+        if registerForm.is_valid:
+            newaes = pyaes.AESModeOfOperationCTR(key)
+            empObj = EmployeeAES (
+                username=getNewAES().encrypt(request.POST['username']),
+                password=getNewAES().encrypt(request.POST['password']),
+                recovery_answer=getNewAES().encrypt(request.POST['recovery_answer']),
+                recovery_email=getNewAES().encrypt(request.POST['recovery_email'])
             )
             empObj.save()
-            empInfoObj = EmployeeInfo( 
+
+            empInfoObj = EmployeeInfoAES (
                 employee=empObj,
-                first_name=request.POST['first_name'], 
-                middle_name=request.POST['middle_name'], 
-                department=request.POST['department'],
-                last_name=request.POST['last_name'], 
-                phone_number=request.POST['phone_number']
+                first_name=getNewAES().encrypt(request.POST['first_name']),
+                middle_name=getNewAES().encrypt(request.POST['middle_name']),
+                department=getNewAES().encrypt(request.POST['department']),
+                last_name=getNewAES().encrypt(request.POST['last_name']),
+                phone_number=getNewAES().encrypt(request.POST['phone_number'])
             )
             empInfoObj.save()
+
         return redirect('index')
     else:
         context = {'user' : registerForm}
         return render(request, 'emptimeclklogmgmt/registeruser.html', context)
-    

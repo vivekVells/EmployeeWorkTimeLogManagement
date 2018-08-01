@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.utils import timezone
 from datetime import date
@@ -31,6 +33,20 @@ class Employee(models.Model):
 
     def __str__(self):
         return "ID: %d Username: %s Password: %s" % (self.id, self.username, self.password)
+
+class EmployeeAES(models.Model):
+    username = models.CharField(max_length=500)
+    password = models.CharField(max_length=500)
+    recovery_answer = models.CharField(max_length=500)
+    recovery_email = models.CharField(max_length=500)
+
+class EmployeeInfoAES(models.Model):
+    employee = models.ForeignKey('EmployeeAES', on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=500)
+    middle_name = models.CharField(max_length=500, blank=True, default='')
+    last_name = models.CharField(max_length=500)
+    department = models.CharField(max_length=500, default='')
+    phone_number = models.CharField(max_length=500, blank=True, null=True)
 
 class EmployeeInfo(models.Model):
     employee = models.ForeignKey('Employee', on_delete=models.CASCADE)
