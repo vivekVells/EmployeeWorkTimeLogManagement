@@ -41,6 +41,7 @@ class EmployeeInfo(models.Model):
     phone_number = models.IntegerField(blank=True, null=True)
     created_on = models.DateTimeField(default=timezone.now)
     deleted_on = models.DateTimeField(blank=True, null=True)
+    actions = ["export_as_csv"]
 
     def __str__(self):
         return "ID: %d First Name: %s Middle Name: %s Last Name: %s Phone Number: %s" % (self.id, self.first_name, self.middle_name, self.last_name, self.phone_number)
@@ -60,6 +61,23 @@ class Work(models.Model):
 
     def __str__(self):
         return "ID: %d Work Status: %s Notes: %s Time: %s Date: %s" % (self.id, self.work_status, self.notes, self.time, self.date)
+    
+    def export_as_csv(self, request, queryset):
+
+        meta = self.model._meta
+        field_names = [field.name for field in meta.fields]
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
+        writer = csv.writer(response)
+
+        writer.writerow(field_names)
+        for obj in queryset:
+            row = writer.writerow([getattr(obj, field) for field in field_names])
+
+        return response
+
+    export_as_csv.short_description = "Export Selected"
 
 class user(models.Model):
     username = models.CharField(max_length=20)
